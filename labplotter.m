@@ -26,13 +26,10 @@ function resultvector=labplotter(M,N,Nchan,lim)
 	endfor
 	meanqueue=P0*(ro*value+(ro^(Nchan+1))*(Nchan+1-ro)/(gamma(Nchan)*((Nchan-ro)^2)));
 	meanlength=(ro^(Nchan+1)*P0)/(gamma(Nchan)*(Nchan-ro)^2);
-	basic=1/gamma(Nchan+1);
 	meanfree=0;
-	for q=1:Nchan
-		basic=basic*ro*(Nchan-q+1);
-		meanfree=meanfree+q*basic;
+	for q=1:Nchan-1
+		meanfree=(Nchan-q)*P(q);
 	endfor
-	meanfree=meanfree*P0;
 	meanbusy=Nchan-meanfree;
 	meanwait=P0*(ro^Nchan)/(serv*gamma(Nchan)*(Nchan-ro)^2);
 	wait=meanwait*ro*serv;
